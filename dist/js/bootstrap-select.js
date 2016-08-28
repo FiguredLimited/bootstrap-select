@@ -328,7 +328,8 @@
     doneButtonText: 'Close',
     multipleSeparator: ', ',
     styleBase: 'btn',
-    style: 'btn-default',
+    // Hack for Bootstrap 4
+    style: 'btn-secondary',
     size: 'auto',
     title: null,
     selectedTextFormat: 'values',
@@ -558,6 +559,9 @@
        * @returns {string}
        */
       var generateA = function (text, classes, inline, tokens) {
+        // Hack for Bootstrap 4
+        classes += " dropdown-item";
+
         return '<a tabindex="0"' +
             (typeof classes !== 'undefined' ? ' class="' + classes + '"' : '') +
             (typeof inline !== 'undefined' ? ' style="' + inline + '"' : '') +
@@ -1006,8 +1010,12 @@
             'overflow': 'hidden',
             'min-height': minHeight + headerHeight + searchHeight + actionsHeight + doneButtonHeight + 'px'
           });
+
+          var innerMaxHeight = menuHeight - headerHeight - searchHeight - actionsHeight - doneButtonHeight;
+          // Hack for Bootstrap 4
+          innerMaxHeight -= 16;
           $menuInner.css({
-            'max-height': menuHeight - headerHeight - searchHeight - actionsHeight - doneButtonHeight - menuPadding.vert + 'px',
+            'max-height': innerMaxHeight - menuPadding.vert + 'px',
             'overflow-y': 'auto',
             'min-height': Math.max(minHeight - menuPadding.vert, 0) + 'px'
           });
@@ -1195,7 +1203,7 @@
     },
 
     tabIndex: function () {
-      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') && 
+      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') &&
         (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
         this.$element.data('tabindex', this.$element.attr('tabindex'));
         this.$button.attr('tabindex', this.$element.data('tabindex'));
@@ -1509,13 +1517,13 @@
           $lisVisible = this.$lis.not('.divider, .dropdown-header, .disabled, .hidden'),
           lisVisLen = $lisVisible.length,
           selectedOptions = [];
-          
+
       if (status) {
         if ($lisVisible.filter('.selected').length === $lisVisible.length) return;
       } else {
         if ($lisVisible.filter('.selected').length === 0) return;
       }
-          
+
       $lisVisible.toggleClass('selected', status);
 
       for (var i = 0; i < lisVisLen; i++) {

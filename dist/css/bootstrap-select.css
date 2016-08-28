@@ -13,6 +13,16 @@ select.selectpicker {
   width: 220px \0;
   /*IE9 and below*/
 }
+.bootstrap-select li.hidden {
+  display: none !important;
+}
+.bootstrap-select li.selected a {
+  background: #3086E4;
+  color: white;
+}
+.bootstrap-select li.selected a:hover {
+  background: #256CB8;
+}
 .bootstrap-select > .dropdown-toggle {
   width: 100%;
   padding-right: 25px;

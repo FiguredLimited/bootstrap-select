@@ -14,6 +14,20 @@ select.selectpicker {
 .bootstrap-select {
   width: 220px \0; /*IE9 and below*/
 
+  // Hacks for Bootstrap 4
+  li.hidden {
+    display: none !important;
+  }
+
+  li.selected a{
+    background: #3086E4;
+    color: white;
+  }
+
+  li.selected a:hover{
+    background: #256CB8;
+  }
+
   // The selectpicker button
   > .dropdown-toggle {
     width: 100%;
@@ -135,7 +149,7 @@ select.selectpicker {
     position: absolute;
     height: 0 !important;
     padding: 0 !important;
-    
+
     .dropdown-menu {
       z-index: @zindex-select-dropdown;
     }
